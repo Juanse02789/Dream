@@ -1,0 +1,96 @@
+# PROYECTO: Cajero automático
+# Versión: 1.0
+# Estado: Funcional, sin refactorizar
+# Objetivo: Practicar condicionales y validaciones
+
+import sys
+
+# Variables
+saldo_inicial = 1000
+saldo2_inicial = 8000
+saldo3_inicial = 500
+pin1_correcto = 1234
+pin2_correcto = 5678
+pin3_correcto = 9012
+intentos = 0
+
+pin = int(input("Bienvenido, introduzca el pin de una de sus cuentas: \n"))
+
+if pin == pin1_correcto or pin == pin2_correcto or pin == pin3_correcto:
+
+    if pin == pin1_correcto:
+        print("¿Bienvenido a su cuenta, que desea hacer?\n")
+        print("1. Consultar saldo")
+        print("2. Depositar dinero")
+        print("3. Retirar dinero ")
+        print("4. Salir\n")
+
+        opcion = int(input("Opción: "))
+
+        if opcion == 1:
+            print(saldo_inicial)
+        elif opcion == 2:
+            deposito = int(input("Introduzca la cantidad a depositar: "))
+            saldo_inicial = saldo_inicial + deposito
+            print("El deposito ha sido exitoso, su nuevo saldo es:", saldo_inicial)
+        elif opcion == 3:
+            retiro = int(input("Introduzca la cantidad a retirar: "))
+            print("Retiro exitoso, su nuevo saldo es: ", retiro)
+        else:
+            print("¡Gracias por usar nuestro servicio!")
+            sys.exit()
+
+    if pin == pin2_correcto:
+        print("¿Bienvenido a su cuenta, que desea hacer?\n")
+        print("1. Consultar saldo")
+        print("2. Depositar dinero")
+        print("3. Retirar dinero ")
+        print("4. Salir\n")
+
+        opcion = int(input("Opción: "))
+
+        if opcion == 1:
+            print(saldo2_inicial)
+        elif opcion == 2:
+            deposito = int(input("Introduzca la cantidad a depositar: "))
+            saldo2_inicial = saldo2_inicial + deposito
+            print("El deposito ha sido exitoso, su nuevo saldo es:", saldo2_inicial)
+        elif opcion == 3:
+            retiro = int(input("Introduzca la cantidad a retirar: "))
+            saldo2_inicial = saldo2_inicial - retiro
+            print("Retiro exitoso, su nuevo saldo es: ", saldo2_inicial)
+        else:
+            print("¡Gracias por usar nuestro servicio!")
+            sys.exit()
+            
+    if pin == pin3_correcto:
+        print("¿Bienvenido a su cuenta, que desea hacer?\n")
+        print("1. Consultar saldo")
+        print("2. Depositar dinero")
+        print("3. Retirar dinero ")
+        print("4. Salir\n")
+
+        opcion = int(input("Opción: "))
+
+        if opcion == 1:
+            print(saldo3_inicial)
+        elif opcion == 2:
+            deposito = int(input("Introduzca la cantidad a depositar: "))
+            saldo3_inicial = saldo3_inicial + deposito
+            print("El deposito ha sido exitoso, su nuevo saldo es:", saldo3_inicial)
+        elif opcion == 3:
+            retiro = int(input("Introduzca la cantidad a retirar: "))
+            saldo3_inicial = saldo3_inicial - retiro
+            print("Retiro exitoso, su nuevo saldo es: ", saldo3_inicial)
+        else:
+            print("¡Gracias por usar nuestro servicio!")
+            sys.exit()
+
+while pin not in (pin1_correcto, pin2_correcto, pin3_correcto) and intentos < 2:
+
+    pin = int(input("La contraseña es incorrecta, vuelvalo a intentar: \n"))
+    intentos = intentos + 1
+
+if intentos == 2:
+    print("Muchos intentos de acceder, intentelo más tarde\n")
+    sys.exit()

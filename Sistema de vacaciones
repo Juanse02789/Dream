@@ -1,0 +1,57 @@
+import sys
+
+print("---------------------------------------")
+print("SISTEMA DE VACACIONES - EMPRESA S.A.S")
+print("---------------------------------------")
+
+Clave1 = 1234
+Clave2 = 5678
+Clave3 = 9012
+
+nombre  = (input("Introduzca su nombre: \n"))
+clave = int(input("Introduzca su clave: \n"))
+anios = float(input("Introduzca sus años de servicio: \n"))
+
+if clave != 1234 and clave != 5678 and clave != 9012:
+    print("No tiene derecho a vacaciones")
+    sys.exit()
+else:
+    print("Nombre: ", nombre)
+    print("Clave: ", clave)
+    print("Años de servicio: ", anios)
+if clave == Clave1:
+    print("Departamento: Atención al cliente")
+elif clave == Clave2:
+    print("Departamento: Logistica")
+else:
+    print("Departamento: Gerencia")
+
+#Dias de vacaciones para clave 1
+
+if clave == Clave1 and anios >= 0 and anios < 2:
+    print("Dias de vacaciones: 6 dias")
+elif clave == Clave1 and anios >= 2 and anios < 7:
+    print("Dias de vacaciones: 14 dias")
+elif clave == Clave1 and anios >=7:
+    print("Dias de vacaciones: 20 dias")
+
+#Dias de vacaciones para clave 2
+    
+if clave == Clave2 and anios >= 0 and anios < 2:
+    print("Dias de vacaciones: 7 dias")
+elif clave == Clave2 and anios >= 2 and anios < 7:
+    print("Dias de vacaciones: 15 dias")
+elif clave == Clave2 and anios >=7:
+    print("Dias de vacaciones: 22 dias")
+    
+#Dias de vacaciones para clave 3
+
+if clave == Clave3 and anios >= 0 and anios < 2:
+    print("Dias de vacaciones: 10 dias")
+elif clave == Clave3 and anios >= 2 and anios < 7:
+    print("Dias de vacaciones: 20 dias")
+elif clave == Clave3 and anios >=7:
+    print("Dias de vacaciones: 30 dias")
+    
+    
+    

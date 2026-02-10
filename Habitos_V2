@@ -1,0 +1,62 @@
+import sys
+
+habito = {}
+
+while True:
+    
+    print("Bienvenido a su administrador de tareas, introduzca una opción:")
+    print("1. Crear habitos.")
+    print("2. Ver habitos.")
+    print("3. Eliminar habitos.")
+    print("4. Actualizar progreso.")
+    print("5. Salir.")
+    
+    
+    opcion = int(input("Opción: "))
+    
+    if opcion == 1:
+        
+        numHabitos = int(input("Introduzca el numero de habitos a añadir: "))
+        for i in range (0, numHabitos):
+            habitos = input("Introduzca el nombre del habito: ")
+            if habitos in habito:
+                print("El habito ya existe...")
+                sys.exit()
+            else:
+                print("\n")
+                progreso = int(input("Progreso del día de hoy (0 = no cumplido, 1 = cumplido): "))
+                if progreso == 1:
+                    habito[habitos] = progreso
+                else:
+                    habito[habitos] = progreso
+    
+    elif opcion == 2:
+        
+        print(habito)
+        
+    elif opcion == 3:
+        
+        habElim = input("Introduzca el habito a eliminar: ")
+        if habElim in habito:
+            del habito[habElim]
+        else:
+            print("El habito no está en la lista...")
+            sys.exit()
+            
+    elif opcion == 4:
+        nomCumplido = input("Introduzca el nombre del habito cumplido o no ha cumplido el dia de hoy: ")
+        cumplido = int(input("0 = no cumplido, 1 = cumplido: "))
+        
+        if nomCumplido in habito and cumplido ==  1:
+            habito[nomCumplido] = progreso+1
+        elif nomCumplido in habito and cumplido == 0:
+            habito[nomCumplido] = progreso-1
+        else:
+            print("El habito no existe...")
+            
+    else:
+        
+        break
+            
+            
+    

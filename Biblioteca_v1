@@ -1,0 +1,61 @@
+
+
+libros = {}
+
+def agregar_libro(libros):
+    numLibros = int(input("Introduzca el numero de libros a añadir: "))
+    for i in range (0, numLibros):
+        print("Introduzca el nombre del libro:")
+        nombre = input("")
+        if nombre in libros:
+            print("El libro ya existe...")
+        else:
+            print("Introduzca la fecha de publicación: ")
+            fecha = input("")
+            global disponibilidad 
+            disponibilidad = True
+            libros[nombre] = disponibilidad, fecha
+        
+    
+def prestar_libro(libros):
+    nomPrestado = input("Introduzca el nombre del libro a prestar: ")
+    if nomPrestado in libros:
+        fecha = input("Introduzca la fecha de publicación: ")
+        libros[disponibilidad] = False
+        disponibilidad = False
+        libros[nomPrestado] = disponibilidad, fecha
+    
+def devolver_libro(libros):
+    nomDevuelto = input("Introduzca el nombre del libro a devolver: ")
+    fecha = input("Introduzca la fecha de publicación: ")
+    disponibilidad = True
+    libros[nomDevuelto] = disponibilidad, fecha
+        
+    
+def ver_libros(libros):
+    print(libros)
+    
+while True:
+    
+    print("Bienvenido a la biblioteca virtual\n")
+    print("1. Agregar libro\n2. Prestar libro\n3. Devolver libro.\n4. Ver libros\n5. Salir")
+    try:
+        opcion = int(input(""))
+    except ValueError:
+        print("No es una opción válida")
+    else:
+        print("Bienvenido")
+        
+        if opcion == 1:
+            agregar_libro(libros)
+        
+        elif opcion == 2:
+            prestar_libro(libros)
+        
+        elif opcion == 3:
+            devolver_libro(libros)
+        
+        elif opcion == 4: 
+            ver_libros(libros)
+        
+        

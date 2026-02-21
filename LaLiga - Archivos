@@ -1,0 +1,32 @@
+estudiantes = {}
+
+try:
+    numEstudiantes = int(input("Introduzca el numero de estudiantes: "))
+    
+    for i in range (0, numEstudiantes):
+        nomEst = input(f"Nombre del estudiante {i+1}: ")
+        golesEst = int(input("Introduzca el numero de goles: "))
+        minutosEst = int(input("Introduzca el numero de minutos jugados: "))
+        
+        puntos = golesEst*2
+        promedioGoles = golesEst / minutosEst
+        
+        estudiantes[nomEst] = golesEst, puntos, minutosEst, promedioGoles
+
+    
+    
+except ValueError:
+    print("Numero no valido...")
+    
+finally:
+    
+    fliga = open("LaLiga.txt", "w")
+    fliga.write(str(estudiantes))
+    fliga.close()
+    
+    flectura = open("LaLiga.txt", "r")
+    texto = flectura.read()
+    flectura.close()
+    print(texto)
+    
+    

@@ -1,0 +1,152 @@
+#Objetivos:
+#Crear un sistema funcional
+#Un buen modelado de datos
+#Control optimo de errores
+#Que realmente haga lo que debe hacer el programa (no solo de manera superficial)
+
+
+#Requerimientos:️
+
+#Gestión de libros
+#Agregar libro
+#Eliminar libro
+#Editar información
+#Buscar libro
+#Ver catálogo completo
+
+#Gestión de usuarios
+
+#Registrar usuario
+#Eliminar usuario
+#Consultar usuario
+#Ver libros que tiene prestados
+
+#Sistema de préstamos
+
+#Prestar libro
+#Devolver libro
+#Evitar prestar si no está disponible
+#Registrar fecha de préstamo
+#Registrar fecha límite de devolución
+
+#Reglas básicas
+
+#Un libro no puede estar prestado a dos personas
+#Un usuario puede tener límite de préstamos
+#No se puede devolver un libro que no está prestado
+#No se puede prestar un libro inexistente
+
+#Libros: Nombre, fecha, disponibilidad
+#Usuarios: Nombre, ID, libros prestados
+
+def agregarLibro(libros):
+    
+    print("Agregar libros: \n")
+    disponibilidad = True
+    nomLibro = input("Introduzca el nombre del libro:\n")
+    try:
+        fechaLibro = int(input("Introduzca la fecha del libro: "))
+    except ValueError:
+        print("No es una fecha valida...")
+    finally:
+        if nomLibro in libros and fechaLibro in libros:
+            print("El libro ya existe...")
+        else:
+            libros[nomLibro] = fechaLibro, disponibilidad
+            print("Libro agregado exitosamente.")
+            print("----------------------------------------------\n")
+    
+    
+def EliminarLibro(libros):
+    
+    print("Eliminar libros: \n")
+    nomElim = input("Introduzca el nombre del libro a eliminar: ")
+    if nomElim in libros:
+        print("El libro ha sido eliminado correctamente...")
+        del libros[nomElim]
+    else:
+        print("El libro no está en la lista...")
+        
+    
+def EditarInformacion(libros):
+    
+    print("Editar informacion: \n")
+    nomEdit = input("Introduzca el nombre del libro que desea editar: ")
+    if nomEdit in libros:
+        print("Introduzca el dato que desea editar: ")
+        print("1. Fecha")
+        print("2. Nombre")
+        print("3. Autor")
+        try:
+            opcionE = int(input("Opción: "))
+        except ValueError:
+            print("No es una opción valida...")
+        finally:
+            if opcionE == 1:
+                newFecha = int(input("Introduzca la nueva fecha: "))
+                libros[nomEdit] = newFecha
+            elif opcionE == 2:
+                try:
+                    newNom = input("Introduzca el nuevo nombre del libro: ")
+                except ValueError:
+                    print("Nombre no valido...")
+                finally:
+                    libros[newNom] = fecha, disponibilidad
+
+    
+def BuscarLibro(libros):
+    
+    print("Buscar libro: \n")
+    
+def VerCatalogo(libros):
+    
+    print("Ver catalogo: \n")
+    print(libros)
+
+
+libros = {}
+Usuarios = {}
+
+while True: 
+    
+    print("----------------------------------------------\nBIBLIOTECA S.A.S\n----------------------------------------------\n")
+    
+    print("--> 1. Gestion de libros")
+    print("--> 2. Gestion de usuarios")
+    print("--> 3. Salir")
+    
+    try:
+        opcion = int(input("Opción: "))
+        print("----------------------------------------------\n")
+        
+    except ValueError:
+        print("No es una opción valida...")
+        
+    finally:
+        
+        if opcion == 1:
+            
+            while True:
+                print("----------------------------------------------\nGESTION DE LIBROS\n----------------------------------------------\n")
+                print("1. Agregar libro\n2. Eliminar libro\n3. Editar información\n4. Buscar libro\n5. Ver catálogo completo")
+                try:
+                    opcionL = int(input("Opción: "))
+                    print("----------------------------------------------\n")
+                
+                except ValueError:
+                    
+                    print("Opción no valida...")
+                    
+                finally:
+                    
+                    if opcionL == 1:
+                        agregarLibro(libros)
+                    elif opcionL == 2:
+                        EliminarLibro(libros)
+                    elif opcionL == 3:
+                        EditarInformacion(libros)
+                    elif opcionL == 4:
+                        BuscarLibro(libros)
+                    elif opcionL == 5:
+                        VerCatalogo(libros)
+    

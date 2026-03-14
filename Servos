@@ -1,0 +1,38 @@
+from machine import Pin, PWM
+import time
+
+servo = PWM(Pin(4), freq=50)
+ledV = Pin(2, Pin.OUT)
+ledA = Pin(3, Pin.OUT)
+ledR = Pin(6, Pin.OUT)
+
+duty1 = int(input("Introduzca el duty: "))
+duty2 = int(input("Introduzca el duty: "))
+duty3 = int(input("Introduzca el duty: "))
+
+while True:
+    
+    servo.duty(duty1)
+    time.sleep(2)
+    
+    if duty1:
+        ledV.on()
+        ledA.off()
+        ledR.off()
+    
+    servo.duty(duty2)
+    time.sleep(2)
+    
+    if duty2:
+        ledV.off()
+        ledA.on()
+        ledR.off()
+   
+    
+    servo.duty(duty3)
+    time.sleep(2)
+    
+    if duty3:
+        ledV.off()
+        ledA.off()
+        ledR.on()

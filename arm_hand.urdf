@@ -1,0 +1,342 @@
+<?xml version="1.0"?>
+<robot name="robotic_arm_with_hand">
+
+  <material name="dark_gray"><color rgba="0.2 0.2 0.2 1.0"/></material>
+  <material name="arm_cyan"><color rgba="0.0 0.6 0.8 1.0"/></material>
+  <material name="finger_color"><color rgba="0.9 0.4 0.1 1.0"/></material>
+
+  <link name="world"/>
+
+  <joint name="world_fixed" type="fixed">
+    <parent link="world"/>
+    <child link="base_link"/>
+  </joint>
+
+  <link name="base_link">
+    <visual>
+      <origin xyz="0 0 0.025" rpy="0 0 0"/>
+      <geometry><cylinder radius="0.12" length="0.05"/></geometry>
+      <material name="dark_gray"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.025" rpy="0 0 0"/>
+      <geometry><cylinder radius="0.12" length="0.05"/></geometry>
+    </collision>
+    <inertial>
+      <mass value="2.0"/>
+      <origin xyz="0 0 0.025" rpy="0 0 0"/>
+      <inertia ixx="0.0076" ixy="0.0" ixz="0.0" iyy="0.0076" iyz="0.0" izz="0.0144"/>
+    </inertial>
+  </link>
+
+  <joint name="joint_1" type="revolute">
+    <parent link="base_link"/><child link="shoulder_link"/>
+    <origin xyz="0 0 0.05" rpy="0 0 0"/><axis xyz="0 0 1"/>
+    <limit lower="-3.14" upper="3.14" effort="50.0" velocity="1.5"/>
+    <dynamics damping="0.7" friction="0.1"/>
+  </joint>
+
+  <link name="shoulder_link">
+    <visual>
+      <origin xyz="0 0 0.075" rpy="0 0 0"/>
+      <geometry><cylinder radius="0.07" length="0.15"/></geometry>
+      <material name="arm_cyan"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.075" rpy="0 0 0"/>
+      <geometry><cylinder radius="0.07" length="0.15"/></geometry>
+    </collision>
+    <inertial>
+      <mass value="1.2"/>
+      <origin xyz="0 0 0.075" rpy="0 0 0"/>
+      <inertia ixx="0.0037" ixy="0.0" ixz="0.0" iyy="0.0037" iyz="0.0" izz="0.0029"/>
+    </inertial>
+  </link>
+
+  <joint name="joint_2" type="revolute">
+    <parent link="shoulder_link"/><child link="upper_arm_link"/>
+    <origin xyz="0 0 0.12" rpy="0 0 0"/><axis xyz="0 1 0"/>
+    <limit lower="-2.35" upper="2.35" effort="50.0" velocity="1.5"/>
+    <dynamics damping="0.7" friction="0.1"/>
+  </joint>
+
+  <link name="upper_arm_link">
+    <visual>
+      <origin xyz="0 0 0.175" rpy="0 0 0"/>
+      <geometry><cylinder radius="0.05" length="0.35"/></geometry>
+      <material name="arm_cyan"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.175" rpy="0 0 0"/>
+      <geometry><cylinder radius="0.05" length="0.35"/></geometry>
+    </collision>
+    <inertial>
+      <mass value="1.0"/>
+      <origin xyz="0 0 0.175" rpy="0 0 0"/>
+      <inertia ixx="0.0108" ixy="0.0" ixz="0.0" iyy="0.0108" iyz="0.0" izz="0.0012"/>
+    </inertial>
+  </link>
+
+  <joint name="joint_3" type="revolute">
+    <parent link="upper_arm_link"/><child link="forearm_link"/>
+    <origin xyz="0 0 0.35" rpy="0 0 0"/><axis xyz="0 1 0"/>
+    <limit lower="-2.5" upper="2.5" effort="40.0" velocity="2.0"/>
+    <dynamics damping="0.5" friction="0.1"/>
+  </joint>
+
+  <link name="forearm_link">
+    <visual>
+      <origin xyz="0 0 0.15" rpy="0 0 0"/>
+      <geometry><cylinder radius="0.04" length="0.30"/></geometry>
+      <material name="arm_cyan"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.15" rpy="0 0 0"/>
+      <geometry><cylinder radius="0.04" length="0.30"/></geometry>
+    </collision>
+    <inertial>
+      <mass value="0.8"/>
+      <origin xyz="0 0 0.15" rpy="0 0 0"/>
+      <inertia ixx="0.0063" ixy="0.0" ixz="0.0" iyy="0.0063" iyz="0.0" izz="0.0006"/>
+    </inertial>
+  </link>
+
+  <joint name="joint_4" type="revolute">
+    <parent link="forearm_link"/><child link="wrist_pitch_link"/>
+    <origin xyz="0 0 0.30" rpy="0 0 0"/><axis xyz="0 0 1"/>
+    <limit lower="-3.14" upper="3.14" effort="20.0" velocity="3.0"/>
+    <dynamics damping="0.2" friction="0.05"/>
+  </joint>
+
+  <link name="wrist_pitch_link">
+    <visual>
+      <origin xyz="0 0 0.02" rpy="0 0 0"/>
+      <geometry><cylinder radius="0.035" length="0.04"/></geometry>
+      <material name="dark_gray"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.02" rpy="0 0 0"/>
+      <geometry><cylinder radius="0.035" length="0.04"/></geometry>
+    </collision>
+    <inertial>
+      <mass value="0.2"/>
+      <origin xyz="0 0 0.02" rpy="0 0 0"/>
+      <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
+    </inertial>
+  </link>
+
+  <joint name="joint_5" type="revolute">
+    <parent link="wrist_pitch_link"/><child link="wrist_roll_link"/>
+    <origin xyz="0 0 0.04" rpy="0 0 0"/><axis xyz="0 1 0"/>
+    <limit lower="-1.57" upper="1.57" effort="20.0" velocity="3.0"/>
+    <dynamics damping="0.2" friction="0.05"/>
+  </joint>
+
+  <link name="wrist_roll_link">
+    <visual>
+      <origin xyz="0 0 0.02" rpy="0 0 0"/>
+      <geometry><cylinder radius="0.03" length="0.04"/></geometry>
+      <material name="dark_gray"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.02" rpy="0 0 0"/>
+      <geometry><cylinder radius="0.03" length="0.04"/></geometry>
+    </collision>
+    <inertial>
+      <mass value="0.15"/>
+      <origin xyz="0 0 0.02" rpy="0 0 0"/>
+      <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
+    </inertial>
+  </link>
+
+  <joint name="joint_6" type="revolute">
+    <parent link="wrist_roll_link"/><child link="palm_link"/>
+    <origin xyz="0 0 0.04" rpy="0 0 0"/><axis xyz="1 0 0"/>
+    <limit lower="-1.57" upper="1.57" effort="10.0" velocity="3.0"/>
+    <dynamics damping="0.2" friction="0.05"/>
+  </joint>
+
+  <link name="palm_link">
+    <visual>
+      <origin xyz="0 0 0.05" rpy="0 0 0"/>
+      <geometry><box size="0.03 0.10 0.10"/></geometry>
+      <material name="dark_gray"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.05" rpy="0 0 0"/>
+      <geometry><box size="0.03 0.10 0.10"/></geometry>
+    </collision>
+    <inertial>
+      <mass value="0.3"/>
+      <origin xyz="0 0 0.05" rpy="0 0 0"/>
+      <inertia ixx="0.0005" ixy="0.0" ixz="0.0" iyy="0.0003" iyz="0.0" izz="0.0003"/>
+    </inertial>
+  </link>
+
+  <joint name="thumb_mcp" type="revolute">
+    <parent link="palm_link"/><child link="thumb_proximal"/>
+    <origin xyz="0.0 0.055 0.02" rpy="0 0.5 0"/><axis xyz="0 1 0"/>
+    <limit lower="0.0" upper="1.57" effort="5.0" velocity="3.0"/>
+  </joint>
+
+  <link name="thumb_proximal">
+    <visual><origin xyz="0 0 0.02"/><geometry><cylinder radius="0.008" length="0.04"/></geometry><material name="finger_color"/></visual>
+    <collision><origin xyz="0 0 0.02"/><geometry><cylinder radius="0.008" length="0.04"/></geometry></collision>
+    <inertial><mass value="0.02"/><origin xyz="0 0 0.02"/><inertia ixx="0.00001" ixy="0" ixz="0" iyy="0.00001" iyz="0" izz="0.00001"/></inertial>
+  </link>
+
+  <joint name="thumb_pip" type="revolute">
+    <parent link="thumb_proximal"/><child link="thumb_distal"/>
+    <origin xyz="0 0 0.04" rpy="0 0 0"/><axis xyz="0 1 0"/>
+    <limit lower="0.0" upper="1.57" effort="5.0" velocity="3.0"/>
+  </joint>
+
+  <link name="thumb_distal">
+    <visual><origin xyz="0 0 0.015"/><geometry><cylinder radius="0.007" length="0.03"/></geometry><material name="finger_color"/></visual>
+    <collision><origin xyz="0 0 0.015"/><geometry><cylinder radius="0.007" length="0.03"/></geometry></collision>
+    <inertial><mass value="0.01"/><origin xyz="0 0 0.015"/><inertia ixx="0.00001" ixy="0" ixz="0" iyy="0.00001" iyz="0" izz="0.00001"/></inertial>
+  </link>
+
+  <joint name="index_mcp" type="revolute">
+    <parent link="palm_link"/><child link="index_proximal"/>
+    <origin xyz="0 0.03 0.10" rpy="0 0 0"/><axis xyz="0 1 0"/>
+    <limit lower="0.0" upper="1.57" effort="5.0" velocity="3.0"/>
+  </joint>
+
+  <link name="index_proximal">
+    <visual><origin xyz="0 0 0.025"/><geometry><cylinder radius="0.008" length="0.05"/></geometry><material name="finger_color"/></visual>
+    <collision><origin xyz="0 0 0.025"/><geometry><cylinder radius="0.008" length="0.05"/></geometry></collision>
+    <inertial><mass value="0.02"/><origin xyz="0 0 0.025"/><inertia ixx="0.00001" ixy="0" ixz="0" iyy="0.00001" iyz="0" izz="0.00001"/></inertial>
+  </link>
+
+  <joint name="index_pip" type="revolute">
+    <parent link="index_proximal"/><child link="index_distal"/>
+    <origin xyz="0 0 0.05" rpy="0 0 0"/><axis xyz="0 1 0"/>
+    <limit lower="0.0" upper="1.57" effort="5.0" velocity="3.0"/>
+  </joint>
+
+  <link name="index_distal">
+    <visual><origin xyz="0 0 0.02"/><geometry><cylinder radius="0.007" length="0.04"/></geometry><material name="finger_color"/></visual>
+    <collision><origin xyz="0 0 0.02"/><geometry><cylinder radius="0.007" length="0.04"/></geometry></collision>
+    <inertial><mass value="0.01"/><origin xyz="0 0 0.02"/><inertia ixx="0.00001" ixy="0" ixz="0" iyy="0.00001" iyz="0" izz="0.00001"/></inertial>
+  </link>
+
+  <joint name="middle_mcp" type="revolute">
+    <parent link="palm_link"/><child link="middle_proximal"/>
+    <origin xyz="0 0.01 0.10" rpy="0 0 0"/><axis xyz="0 1 0"/>
+    <limit lower="0.0" upper="1.57" effort="5.0" velocity="3.0"/>
+  </joint>
+
+  <link name="middle_proximal">
+    <visual><origin xyz="0 0 0.03"/><geometry><cylinder radius="0.008" length="0.06"/></geometry><material name="finger_color"/></visual>
+    <collision><origin xyz="0 0 0.03"/><geometry><cylinder radius="0.008" length="0.06"/></geometry></collision>
+    <inertial><mass value="0.02"/><origin xyz="0 0 0.03"/><inertia ixx="0.00001" ixy="0" ixz="0" iyy="0.00001" iyz="0" izz="0.00001"/></inertial>
+  </link>
+
+  <joint name="middle_pip" type="revolute">
+    <parent link="middle_proximal"/><child link="middle_distal"/>
+    <origin xyz="0 0 0.06" rpy="0 0 0"/><axis xyz="0 1 0"/>
+    <limit lower="0.0" upper="1.57" effort="5.0" velocity="3.0"/>
+  </joint>
+
+  <link name="middle_distal">
+    <visual><origin xyz="0 0 0.02"/><geometry><cylinder radius="0.007" length="0.04"/></geometry><material name="finger_color"/></visual>
+    <collision><origin xyz="0 0 0.02"/><geometry><cylinder radius="0.007" length="0.04"/></geometry></collision>
+    <inertial><mass value="0.01"/><origin xyz="0 0 0.02"/><inertia ixx="0.00001" ixy="0" ixz="0" iyy="0.00001" iyz="0" izz="0.00001"/></inertial>
+  </link>
+
+  <joint name="ring_mcp" type="revolute">
+    <parent link="palm_link"/><child link="ring_proximal"/>
+    <origin xyz="0 -0.01 0.10" rpy="0 0 0"/><axis xyz="0 1 0"/>
+    <limit lower="0.0" upper="1.57" effort="5.0" velocity="3.0"/>
+  </joint>
+
+  <link name="ring_proximal">
+    <visual><origin xyz="0 0 0.025"/><geometry><cylinder radius="0.008" length="0.05"/></geometry><material name="finger_color"/></visual>
+    <collision><origin xyz="0 0 0.025"/><geometry><cylinder radius="0.008" length="0.05"/></geometry></collision>
+    <inertial><mass value="0.02"/><origin xyz="0 0 0.025"/><inertia ixx="0.00001" ixy="0" ixz="0" iyy="0.00001" iyz="0" izz="0.00001"/></inertial>
+  </link>
+
+  <joint name="ring_pip" type="revolute">
+    <parent link="ring_proximal"/><child link="ring_distal"/>
+    <origin xyz="0 0 0.05" rpy="0 0 0"/><axis xyz="0 1 0"/>
+    <limit lower="0.0" upper="1.57" effort="5.0" velocity="3.0"/>
+  </joint>
+
+  <link name="ring_distal">
+    <visual><origin xyz="0 0 0.02"/><geometry><cylinder radius="0.007" length="0.04"/></geometry><material name="finger_color"/></visual>
+    <collision><origin xyz="0 0 0.02"/><geometry><cylinder radius="0.007" length="0.04"/></geometry></collision>
+    <inertial><mass value="0.01"/><origin xyz="0 0 0.02"/><inertia ixx="0.00001" ixy="0" ixz="0" iyy="0.00001" iyz="0" izz="0.00001"/></inertial>
+  </link>
+
+  <joint name="pinky_mcp" type="revolute">
+    <parent link="palm_link"/><child link="pinky_proximal"/>
+    <origin xyz="0 -0.03 0.10" rpy="0 0 0"/><axis xyz="0 1 0"/>
+    <limit lower="0.0" upper="1.57" effort="5.0" velocity="3.0"/>
+  </joint>
+
+  <link name="pinky_proximal">
+    <visual><origin xyz="0 0 0.02"/><geometry><cylinder radius="0.007" length="0.04"/></geometry><material name="finger_color"/></visual>
+    <collision><origin xyz="0 0 0.02"/><geometry><cylinder radius="0.007" length="0.04"/></geometry></collision>
+    <inertial><mass value="0.015"/><origin xyz="0 0 0.02"/><inertia ixx="0.00001" ixy="0" ixz="0" iyy="0.00001" iyz="0" izz="0.00001"/></inertial>
+  </link>
+
+  <joint name="pinky_pip" type="revolute">
+    <parent link="pinky_proximal"/><child link="pinky_distal"/>
+    <origin xyz="0 0 0.04" rpy="0 0 0"/><axis xyz="0 1 0"/>
+    <limit lower="0.0" upper="1.57" effort="5.0" velocity="3.0"/>
+  </joint>
+
+  <link name="pinky_distal">
+    <visual><origin xyz="0 0 0.015"/><geometry><cylinder radius="0.006" length="0.03"/></geometry><material name="finger_color"/></visual>
+    <collision><origin xyz="0 0 0.015"/><geometry><cylinder radius="0.006" length="0.03"/></geometry></collision>
+    <inertial><mass value="0.01"/><origin xyz="0 0 0.015"/><inertia ixx="0.00001" ixy="0" ixz="0" iyy="0.00001" iyz="0" izz="0.00001"/></inertial>
+  </link>
+
+  <gazebo reference="base_link"><material>Gazebo/DarkGrey</material></gazebo>
+  <gazebo reference="shoulder_link"><material>Gazebo/Cyan</material></gazebo>
+  <gazebo reference="upper_arm_link"><material>Gazebo/Cyan</material></gazebo>
+  <gazebo reference="forearm_link"><material>Gazebo/Cyan</material></gazebo>
+  <gazebo reference="wrist_pitch_link"><material>Gazebo/DarkGrey</material></gazebo>
+  <gazebo reference="wrist_roll_link"><material>Gazebo/DarkGrey</material></gazebo>
+  <gazebo reference="palm_link"><material>Gazebo/DarkGrey</material></gazebo>
+  <gazebo reference="thumb_proximal"><material>Gazebo/Orange</material></gazebo>
+  <gazebo reference="thumb_distal"><material>Gazebo/Orange</material></gazebo>
+  <gazebo reference="index_proximal"><material>Gazebo/Orange</material></gazebo>
+  <gazebo reference="index_distal"><material>Gazebo/Orange</material></gazebo>
+  <gazebo reference="middle_proximal"><material>Gazebo/Orange</material></gazebo>
+  <gazebo reference="middle_distal"><material>Gazebo/Orange</material></gazebo>
+  <gazebo reference="ring_proximal"><material>Gazebo/Orange</material></gazebo>
+  <gazebo reference="ring_distal"><material>Gazebo/Orange</material></gazebo>
+  <gazebo reference="pinky_proximal"><material>Gazebo/Orange</material></gazebo>
+  <gazebo reference="pinky_distal"><material>Gazebo/Orange</material></gazebo>
+
+  <ros2_control name="GazeboSystem" type="system">
+    <hardware>
+      <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+    </hardware>
+    <joint name="joint_1"><command_interface name="position"/><state_interface name="position"/><state_interface name="velocity"/></joint>
+    <joint name="joint_2"><command_interface name="position"/><state_interface name="position"/><state_interface name="velocity"/></joint>
+    <joint name="joint_3"><command_interface name="position"/><state_interface name="position"/><state_interface name="velocity"/></joint>
+    <joint name="joint_4"><command_interface name="position"/><state_interface name="position"/><state_interface name="velocity"/></joint>
+    <joint name="joint_5"><command_interface name="position"/><state_interface name="position"/><state_interface name="velocity"/></joint>
+    <joint name="joint_6"><command_interface name="position"/><state_interface name="position"/><state_interface name="velocity"/></joint>
+    <joint name="thumb_mcp"><command_interface name="position"/><state_interface name="position"/><state_interface name="velocity"/></joint>
+    <joint name="thumb_pip"><command_interface name="position"/><state_interface name="position"/><state_interface name="velocity"/></joint>
+    <joint name="index_mcp"><command_interface name="position"/><state_interface name="position"/><state_interface name="velocity"/></joint>
+    <joint name="index_pip"><command_interface name="position"/><state_interface name="position"/><state_interface name="velocity"/></joint>
+    <joint name="middle_mcp"><command_interface name="position"/><state_interface name="position"/><state_interface name="velocity"/></joint>
+    <joint name="middle_pip"><command_interface name="position"/><state_interface name="position"/><state_interface name="velocity"/></joint>
+    <joint name="ring_mcp"><command_interface name="position"/><state_interface name="position"/><state_interface name="velocity"/></joint>
+    <joint name="ring_pip"><command_interface name="position"/><state_interface name="position"/><state_interface name="velocity"/></joint>
+    <joint name="pinky_mcp"><command_interface name="position"/><state_interface name="position"/><state_interface name="velocity"/></joint>
+    <joint name="pinky_pip"><command_interface name="position"/><state_interface name="position"/><state_interface name="velocity"/></joint>
+  </ros2_control>
+
+  <gazebo>
+    <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
+      <parameters>$(find hand_gesture_control)/config/controllers.yaml</parameters>
+    </plugin>
+  </gazebo>
+
+</robot>
